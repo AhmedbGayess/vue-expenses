@@ -5,9 +5,21 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"yarn run server\" \"yarn run serve\""
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.2.1",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.3",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -19,6 +31,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "nodemon": "^1.18.9",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {

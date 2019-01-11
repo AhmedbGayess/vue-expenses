@@ -1,23 +1,40 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Login from "./views/Login.vue";
+import CreateUser from "./views/CreateUser.vue";
+import Dashboard from "./views/Dashboard.vue";
+import CreateExpense from "./views/CreateExpense.vue";
+import EditExpense from "./views/EditExpense.vue";
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      name: "Login",
+      path: "/",
+      component: Login
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      name: "CreateUserPage",
+      path: "/create_user",
+      component: CreateUser
+    },
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      component: Dashboard
+    },
+    {
+      name: "CreateExpensePage",
+      path: "/create_expense",
+      component: CreateExpense
+    },
+    {
+      name: "EditExpensePage",
+      path: "/edit_expense/:id",
+      component: EditExpense
     }
-  ]
+  ],
+  mode: "history"
 })
