@@ -7,7 +7,7 @@
       <p>{{expense.amount}}</p>
       <p>{{date}}</p>
     </router-link>
-      <button class="btn btn-danger" @click="deleteExpense">Delete</button>
+    <button class="btn btn-danger" @click="deleteExpense">Delete</button>
   </div>
 </template>
 
@@ -30,11 +30,15 @@ export default {
   },
   methods: {
     deleteExpense() {
-      this.$store.dispatch("removeExpense", this.expense._id)
+      this.$store.dispatch("removeExpense", this.expense._id);
     }
   }
 };
 </script>
 
 <style scoped>
+a {
+  color: #000;
+  text-decoration: none;
+}
 </style>
