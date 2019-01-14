@@ -8,8 +8,7 @@
     "lint": "vue-cli-service lint",
     "server": "nodemon server/server.js",
     "dev": "concurrently \"yarn run server\" \"yarn run serve\"",
-    "start": "node server/server.js",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
+    "start": "node server/server.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
