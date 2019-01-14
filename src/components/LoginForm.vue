@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="login">
+    <form @submit="loginUser">
       <div class="form-group row">
         <label for="email" class="col-sm-2">Email</label>
         <div class="col-sm-10">
@@ -14,8 +14,11 @@
         </div>
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-primary text-center">Login</button>
+        <button type="submit" class="btn btn-primary text-center mb-5">Login</button>
       </div>
+      <router-link to="create_user">
+        <p class="text-center">Create Account</p>
+      </router-link>
     </form>
   </div>
 </template>
@@ -29,7 +32,7 @@ export default {
     };
   },
   methods: {
-    login(e) {
+    loginUser(e) {
       e.preventDefault();
 
       const userData = {
@@ -37,7 +40,7 @@ export default {
         password: this.password
       };
 
-      console.log(userData);
+      this.$store.dispatch("login", userData);
     }
   }
 };

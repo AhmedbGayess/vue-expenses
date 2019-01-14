@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="submitExpense">
+    <form @submit="submit">
       <div class="form-group">
         <label for="description">Description</label>
         <input type="text" v-model="description" id="description" class="form-control">
@@ -20,14 +20,14 @@
 export default {
   data() {
     return {
-      description: "",
-      amount: 0,
-      date: "",
-      note: ""
+      description: this.expense.description || "",
+      amount: this.expense.amount || 0,
+      date: this.expense.date || "",
+      note: this.expense.note || ""
     };
   },
   methods: {
-    submitExpense(e) {
+    submit(e) {
       e.preventDefault();
 
       const expense = {
@@ -37,7 +37,16 @@ export default {
         note: this.note
       };
 
-      console.log(expense);
+      this.submitExpense(expense);
+    }
+  },
+  props: {
+    submitExpense: {
+      type: Function,
+      required: true
+    },
+    expense: {
+      type: Object
     }
   }
 };

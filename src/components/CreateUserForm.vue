@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import axios from "../services/Api.js";
 export default {
   data() {
     return {
@@ -39,7 +40,7 @@ export default {
         password: this.password
       };
 
-      console.log(userData);
+      this.$store.dispatch("registerUser", userData);
     }
   }
 };

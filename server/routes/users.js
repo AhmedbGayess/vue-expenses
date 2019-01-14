@@ -45,7 +45,14 @@ router.post("/register", (req, res) => {
                     // Save user to database
                     newUser
                         .save()
-                        .then(user => res.json(user))
+                        .then(user =>
+                            res.json({
+                                id: user.id,
+                                email: user.email,
+                                firstname: user.firstname,
+                                lastname: user.lastname
+                            })
+                        )
                         .catch(err => console.log(err));
                 });
             });
@@ -67,11 +74,9 @@ router.post("/login", (req, res) => {
     User.findOne({ email: req.body.email }).then(user => {
         //Check if user exists
         if (!user) {
-            return res
-                .status(404)
-                .json({
-                    email: "No user with the provided email address was found"
-                });
+            return res.status(404).json({
+                email: "No user with the provided email address was found"
+            });
         }
 
         // Check password
@@ -82,7 +87,8 @@ router.post("/login", (req, res) => {
                 const payload = {
                     id: user.id,
                     email: user.email,
-                    isAdmin: user.isAdmin
+                    firstname: user.firstname,
+                    lastname: user.lastname
                 };
 
                 // Sign Token
@@ -106,51 +112,5 @@ router.post("/login", (req, res) => {
         });
     });
 });
-
-// Get current user
-router.get(
-    "/current",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
-        res.json({
-            id: req.user.id,
-            email: req.user.email
-        });
-    }
-);
-
-// Modify User info
-router.put(
-    "/",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
-        const { error } = validateUser(req.body);
-        if (error) {
-            return res.status(400).send(error.details[0].message);
-        }
-
-        // Updates
-        const userUpdates = {
-            email: req.body.email,
-            password: req.body.password
-        };
-
-        // Hash password
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(userUpdates.password, salt, (err, hash) => {
-                if (err) throw err;
-                userUpdates.password = hash;
-                // Find user and update info
-                User.findOneAndUpdate(
-                    { _id: req.user.id },
-                    { $set: userUpdates },
-                    { new: true }
-                )
-                    .then(user => res.json(user))
-                    .catch(err => res.json({ email: "Email already used" }));
-            });
-        });
-    }
-);
 
 module.exports = router;
