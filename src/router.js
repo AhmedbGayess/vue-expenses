@@ -65,7 +65,7 @@ export default new Router({
       path: "/edit_expense/:id",
       component: EditExpense,
       beforeEnter(to, from, next) {
-        if(store.state.isAuthenticated) {
+        if(store.state.auth.isAuthenticated) {
           next();
         } else {
           next("/");

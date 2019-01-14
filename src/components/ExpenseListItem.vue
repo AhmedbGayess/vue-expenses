@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style scoped>
-a {
+a, a:hover {
   color: #000;
   text-decoration: none;
 }
