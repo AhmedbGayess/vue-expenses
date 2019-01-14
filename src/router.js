@@ -6,6 +6,8 @@ import Dashboard from "./views/Dashboard.vue";
 import CreateExpense from "./views/CreateExpense.vue";
 import EditExpense from "./views/EditExpense.vue";
 
+import store from "./store/store";
+
 Vue.use(Router)
 
 export default new Router({
@@ -13,28 +15,64 @@ export default new Router({
     {
       name: "Login",
       path: "/",
-      component: Login
+      component: Login,
+      beforeEnter(to, from, next) {
+        if(!store.state.auth.isAuthenticated) {
+          next();
+        } else {
+          next("/dashboard");
+        }
+      }
     },
     {
       name: "CreateUserPage",
       path: "/create_user",
-      component: CreateUser
+      component: CreateUser,
+      beforeEnter(to, from, next) {
+        if(!store.state.auth.isAuthenticated) {
+          next();
+        } else {
+          next("/");
+        }
+      }
     },
     {
       name: "Dashboard",
       path: "/dashboard",
-      component: Dashboard
+      component: Dashboard,
+      beforeEnter(to, from, next) {
+        if(store.state.auth.isAuthenticated) {
+          next();
+        } else {
+          next("/");
+        }
+      }
     },
     {
       name: "CreateExpensePage",
       path: "/create_expense",
-      component: CreateExpense
+      component: CreateExpense,
+      beforeEnter(to, from, next) {
+        if(store.state.auth.isAuthenticated) {
+          next();
+        } else {
+          next("/");
+        }
+      }
     },
     {
       name: "EditExpensePage",
       path: "/edit_expense/:id",
-      component: EditExpense
+      component: EditExpense,
+      beforeEnter(to, from, next) {
+        if(store.state.isAuthenticated) {
+          next();
+        } else {
+          next("/");
+        }
+      }
     }
   ],
   mode: "history"
 })
+
