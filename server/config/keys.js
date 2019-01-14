@@ -1,4 +1,5 @@
-module.exports = {
-  mongoURI: "mongodb://ahmedbengayess:windows8.1@ds155164.mlab.com:55164/vue-expenses",
-  secretOrKey: "chmenka"
-};
+if (process.env.NODE_ENV  === "production") {
+  module.exports = require("./keys_prod");
+} else {
+  module.exports = require("./keys_dev");
+}
