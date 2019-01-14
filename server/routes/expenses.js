@@ -24,16 +24,12 @@ router.post(
             return res.status(400).send(errors);
         }
 
-        let currentUser;
-
         // Find user
         User.findById(req.user.id)
             .then(user => {
                 if (!user) {
                     return res.status(404).json({ user: "No user found" });
                 }
-
-                currentUser = user;
 
                 // Create new expense
                 const newExpense = new Expense({
