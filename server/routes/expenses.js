@@ -66,23 +66,6 @@ router.get(
     }
 );
 
-// Get expense by id
-router.get(
-    "/:id",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
-        Expense.findOne({ _id: req.params.id, owner: req.user.id })
-            .then(expense => {
-                if (!expense) {
-                    return res.status(404).send("No expense found");
-                }
-
-                res.json(expense);
-            })
-            .catch(err => console.log(err));
-    }
-);
-
 // Edit expense
 router.patch(
     "/:id",
