@@ -14,6 +14,7 @@ export default new Router({
   routes: [
     {
       name: "Login",
+      exact,
       path: "/",
       component: Login,
       beforeEnter(to, from, next) {
