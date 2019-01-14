@@ -9,7 +9,7 @@
     "server": "nodemon server/server.js",
     "dev": "concurrently \"yarn run server\" \"yarn run serve\"",
     "start": "node server/server.js",
-    "heroku-postbuild": "yarn install --only=dev --no-shrinkwrap && yarn run build"
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
