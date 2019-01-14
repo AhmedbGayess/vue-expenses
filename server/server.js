@@ -36,13 +36,11 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/expenses", expenses);
 
-app.get("/", (req, res) => res.json({why: "Please why"}));
+// Static folder
+app.use(serveStatic(__dirname + "/public"));
 
-// // Static folder
-// app.use(serveStatic(__dirname + "/public"));
-
-// //Handle single page application
-// app.get(/.*/, (req, res) => res.sendFile(__dirname + "/public/index.html"));
+//Handle single page application
+app.get(/.*/, (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
 
 const port = process.env.PORT || 5000;
