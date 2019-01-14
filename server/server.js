@@ -3,15 +3,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require("cors");
-const path = require("path");
 
 const users = require("./routes/users");
 const expenses = require("./routes/expenses");
 
 const app = express();
-
-// Static folder
-app.use(express.static(path.resolve(__dirname + "./public")));
 
 // cors middleware
 app.use(cors());
@@ -40,10 +36,14 @@ app.use("/api/users", users);
 app.use("/api/expenses", expenses);
 
 // Handle production
-    
+if (process.env.NODE_ENV === "production") {
+    // Static folder
+    app.use(express.static(__dirname + "/public/"));
 
     //Handle single page application
     app.get(/.*/, (req, res) => res.sendFile(__dirname + "/public/index.html"));
+}
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server running on ${port}`));
