@@ -63,7 +63,14 @@ export default new Router({
     {
       name: "EditExpensePage",
       path: "/edit_expense/:id",
-      component: EditExpense
+      component: EditExpense,
+      beforeEnter(to, from, next) {
+        if(store.state.auth.isAuthenticated) {
+          next();
+        } else {
+          next("/");
+        }
+      }
     }
   ],
   mode: "history"
