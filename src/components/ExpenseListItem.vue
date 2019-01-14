@@ -1,6 +1,6 @@
 <template>
   <div class="list-group-item list-group-item-action">
-    <router-link :to="link">
+    <router-link :to="expense._id">
       <p>
         <strong>{{expense.description}}</strong>
       </p>
@@ -23,9 +23,6 @@ export default {
   computed: {
     date() {
       return moment(this.expense.date).format("YYYY/MM/DD");
-    },
-    link() {
-      return `/edit_expense/${this.expense._id}`;
     }
   },
   methods: {

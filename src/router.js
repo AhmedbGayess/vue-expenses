@@ -14,7 +14,6 @@ export default new Router({
   routes: [
     {
       name: "Login",
-      exact,
       path: "/",
       component: Login,
       beforeEnter(to, from, next) {
@@ -63,7 +62,7 @@ export default new Router({
     },
     {
       name: "EditExpensePage",
-      path: "/edit_expense/:id",
+      path: "/:id",
       component: EditExpense,
       beforeEnter(to, from, next) {
         if(store.state.auth.isAuthenticated) {
