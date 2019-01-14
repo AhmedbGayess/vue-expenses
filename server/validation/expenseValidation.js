@@ -2,9 +2,9 @@ const Joi = require("joi");
 
 const validateExpense = (expense) => {
   const schema = {
-    description: Joi.string().min(2).max(500).required().error(() => "Description is required"),
+    description: Joi.string().max(500).required().error(() => "Description is required"),
     amount: Joi.number().min(0).required().error(() => "Amount is required"),
-    note: Joi.string(),
+    note: Joi.string().allow(""),
     date: Joi.date()
   }
 

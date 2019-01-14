@@ -45,7 +45,9 @@ export default {
                 .then(expense => {
                     commit("ADD_EXPENSE", expense);
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    commit("SET_ERRORS", err.response.data);
+                });
         },
         removeExpense({ commit }, id) {
             axios
@@ -61,7 +63,9 @@ export default {
                 .then(expense => {
                     commit("UPDATE_EXPENSE", expense);
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    commit("SET_ERRORS", err.response.data);
+                });
         }
     },
     getters: {
